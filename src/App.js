@@ -1,3 +1,4 @@
+// Styles
 import "./App.css";
 
 // Components

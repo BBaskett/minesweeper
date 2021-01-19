@@ -1,5 +1,4 @@
 .Window {
-  resize: both;
   overflow: hidden;
   max-width: 90vw;
   min-width: 300px;
@@ -94,6 +93,7 @@
   width: 200px;
   padding: 0;
   border-style: outset;
+  position: absolute;
 }
 
 .Subnav-Menu.hidden {
