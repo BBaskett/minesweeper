@@ -1,5 +1,5 @@
 // Styles
-import "./App.css";
+import "./App.scss";
 
 // Components
 import Window from "./components/Window";

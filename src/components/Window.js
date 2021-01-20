@@ -2,7 +2,7 @@ import React from "react";
 import Draggable from "react-draggable";
 
 // Styles
-import "./Window.css";
+import "./Window.scss";
 
 // Images
 import icon from "../images/minesweeper_icon.png";
@@ -13,6 +13,8 @@ import Minesweeper from "./Minesweeper";
 function Window() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [helpOpen, setHelpOpen] = React.useState(false);
+  let width = 8;
+  let height = 8;
   const menuOptions = {
     game: ["New Game", "Statistics", "Options", "Change Appearance", "Exit"],
     help: ["Help Me"],
@@ -23,6 +25,7 @@ function Window() {
       axis="both"
       defaultPosition={{ x: 0, y: 0 }}
       bounds="parent"
+      cancel=".Window-Header-Controls-Right, .Content, .Window-Header-Subnav"
     >
       <main className="Window">
         <header className="Window-Header">
@@ -40,12 +43,8 @@ function Window() {
             </section>
           </section>
           <nav className="Window-Header-Subnav">
-            <a href="#" onClick={() => setMenuOpen(!menuOpen)}>
-              Game
-            </a>
-            <a href="#" onClick={() => setHelpOpen(!helpOpen)}>
-              Help
-            </a>
+            <span onClick={() => setMenuOpen(!menuOpen)}>Game</span>
+            <span onClick={() => setHelpOpen(!helpOpen)}>Help</span>
             <ul className={`Subnav-Menu ${menuOpen ? "" : "hidden"}`}>
               {menuOptions.game.map((action) => (
                 <li>{action}</li>
@@ -59,7 +58,7 @@ function Window() {
           </nav>
         </header>
         <section className="Content">
-          <Minesweeper />
+          <Minesweeper width={width} height={height} />
         </section>
       </main>
     </Draggable>

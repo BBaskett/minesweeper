@@ -1,5 +1,5 @@
 import React from "react";
-import "./Taskbar.css";
+import "./Taskbar.scss";
 
 // Images
 import windows98flag from "../images/windows98flag.png";
