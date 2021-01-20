@@ -10,15 +10,14 @@ import icon from "../images/minesweeper_icon.png";
 // Componenents
 import Minesweeper from "./Minesweeper";
 
-function Window() {
+// TODO: Put actions for each menu options
+
+function Window(props) {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [helpOpen, setHelpOpen] = React.useState(false);
+  // TODO: Make grid size an option
   let width = 8;
   let height = 8;
-  const menuOptions = {
-    game: ["New Game", "Statistics", "Options", "Change Appearance", "Exit"],
-    help: ["Help Me"],
-  };
   return (
     <Draggable
       allowAnyClick={false}
@@ -46,14 +45,14 @@ function Window() {
             <span onClick={() => setMenuOpen(!menuOpen)}>Game</span>
             <span onClick={() => setHelpOpen(!helpOpen)}>Help</span>
             <ul className={`Subnav-Menu ${menuOpen ? "" : "hidden"}`}>
-              {menuOptions.game.map((action) => (
-                <li>{action}</li>
-              ))}
+              <li>New Game</li>
+              <li>Statistics</li>
+              <li>Options</li>
+              <li>Change Appearance</li>
+              <li onClick={() => props.setExit(true)}>Exit</li>
             </ul>
             <ul className={`Subnav-Menu ${helpOpen ? "" : "hidden"}`}>
-              {menuOptions.help.map((action) => (
-                <li>{action}</li>
-              ))}
+              <li>Help</li>
             </ul>
           </nav>
         </header>

@@ -3,11 +3,17 @@
   width: 100%;
   .Minesweeper-Header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    margin: 8px 0;
     span {
-      width: 3rem;
-      font-size: 3rem;
+      width: 25%;
+      font-size: 2rem;
+      background-color: black;
+      color: red;
+      text-align: center;
+      padding: 2px;
+      border-style: inset;
     }
     .Minesweeper-Reset-Button {
       border-style: outset;

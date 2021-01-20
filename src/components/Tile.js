@@ -7,15 +7,19 @@ import "./Tile.scss";
 import flag from "../images/flag.svg";
 
 function Tile(props) {
-  const { type } = props;
+  const { type, over } = props;
   const [active, setActive] = React.useState(false);
   const [flagged, setFlagged] = React.useState(false);
+  if (over) {
+    setActive(over);
+  }
   function checkTile() {
     if (type === "b") {
     }
     return type;
   }
   function handleClick(event) {
+    props.start(true);
     // Right Click
     if (event.button === 2) {
       if (flagged || active) {
