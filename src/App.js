@@ -3,24 +3,37 @@ import React from "react";
 // Styles
 import "./App.scss";
 
+// Images
+import minesweeper_icon from "./images/minesweeper_icon.png";
+
 // Components
 import Window from "./components/Window";
 import Taskbar from "./components/Taskbar";
+import Minesweeper from "./components/Minesweeper";
 
+// TODO: Add ability to open new window from start menu
 function App() {
-  const [gameOver, setGameOver] = React.useState(false);
-  const [exit, setExit] = React.useState(false);
+  const subnav = [
+    {
+      name: "Game",
+      children: [
+        "New Game",
+        "Statistics",
+        "Options",
+        "Change Appearance",
+        "Exit",
+      ],
+    },
+    { name: "Help", children: ["Instructions"] },
+  ];
   return (
     <div className="App-Wrapper">
-      {exit ? null : (
-        <Window
-          gameOver={gameOver}
-          setGameOver={setGameOver}
-          setExit={setExit}
-        />
-      )}
-      // TODO: Add ability to open new window from start menu
-      <Taskbar setExit={setExit} />
+      <Window
+        title="Minesweeper"
+        icon={minesweeper_icon}
+        child={<Minesweeper />}
+      />
+      <Taskbar />
     </div>
   );
 }

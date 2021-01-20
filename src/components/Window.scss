@@ -43,12 +43,6 @@
             outline: none;
           }
         }
-        .box {
-          display: block;
-          height: 0.5rem;
-          width: 0.5rem;
-          border: 1px solid black;
-        }
       }
     }
     .Window-Header-Subnav {
@@ -95,5 +89,47 @@
     justify-content: center;
     align-items: center;
     background-color: #d8d8d8;
+  }
+}
+
+.Window {
+  overflow: hidden;
+  min-width: 300px;
+  min-height: 300px;
+  max-height: 700px;
+  max-width: 700px;
+  border: 3px solid#d8d8d8;
+  header {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    background: linear-gradient(90deg, #122a6e, #1a7bc2);
+    padding: 4px;
+    .Window-Header-Left {
+      display: flex;
+      align-items: center;
+      img {
+        height: 16px;
+        width: 16px;
+        margin-right: 4px;
+      }
+      span {
+        color: white;
+        font-weight: 700;
+        text-shadow: 2px 2px rgb(0, 0, 0);
+      }
+    }
+    .Window-Header-Right {
+      button {
+        border-radius: 0;
+        font-weight: 700;
+        background-color: #d8d8d8;
+        height: 1.5rem;
+        width: 1.5rem;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
   }
 }
