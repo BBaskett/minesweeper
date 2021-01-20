@@ -3,10 +3,16 @@ import React from "react";
 // Styles
 import "./Minesweeper.scss";
 
+// Images
+import smiley from "../images/smiley.svg";
+
+// Components
+import Tile from "./Tile";
+
 function Minesweeper(props) {
   const { width, height } = props;
   const gridSize = width * height;
-  const bombs = new Array(10).fill("x");
+  const bombs = new Array(10).fill("b");
   const tiles = new Array(gridSize - 10).fill("o");
   const gameArray = tiles.concat(bombs);
   function shuffle(array) {
@@ -33,12 +39,14 @@ function Minesweeper(props) {
     <div id="Minesweeper">
       <header className="Minesweeper-Header">
         <span>10</span>
-        <button>Reset</button>
+        <div className="Minesweeper-Reset-Button">
+          <img src={smiley} alt="reset" />
+        </div>
         <span>0</span>
       </header>
       <main className="Minesweeper-Field">
         {gameArray.map((tile) => (
-          <button>{tile}</button>
+          <Tile type={tile} />
         ))}
       </main>
     </div>

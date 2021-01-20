@@ -74,6 +74,7 @@
         padding: 0;
         border-style: outset;
         position: absolute;
+        background-color: inherit;
         &.hidden {
           display: none;
         }

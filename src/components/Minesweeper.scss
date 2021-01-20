@@ -9,6 +9,20 @@
       width: 3rem;
       font-size: 3rem;
     }
+    .Minesweeper-Reset-Button {
+      border-style: outset;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 36px;
+      width: 36px;
+      cursor: pointer;
+      user-select: none;
+      img {
+        height: 75%;
+        width: 75%;
+      }
+    }
   }
   .Minesweeper-Field {
     display: grid;
@@ -18,9 +32,5 @@
     width: 300px;
     justify-items: center;
     align-items: center;
-    button {
-      height: 100%;
-      width: 100%;
-    }
   }
 }
