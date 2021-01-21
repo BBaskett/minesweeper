@@ -1,42 +1,94 @@
-#Minesweeper {
-  height: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap");
+
+ul.minesweeper-nav {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 4px 0;
+  background-color: #d8d8d8;
+  display: inline-flex;
+  font-size: 0.75rem;
   width: 100%;
-  .Minesweeper-Header {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 8px 0;
-    span {
-      width: 25%;
-      font-size: 2rem;
-      background-color: black;
-      color: red;
-      text-align: center;
-      padding: 2px;
+  border-style: outset;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  > li {
+    position: relative;
+    > span {
+      &.active {
+        border-color: unset;
+      }
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+      border-top-width: 1px;
+      border-right-width: 2px;
+      border-bottom-width: 1px;
+      border-left-width: 2px;
       border-style: inset;
-    }
-    .Minesweeper-Reset-Button {
-      border-style: outset;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 36px;
-      width: 36px;
-      cursor: pointer;
+      border-color: transparent;
+      padding: 4px 8px 2px 8px;
+      box-sizing: border-box;
       user-select: none;
-      img {
-        height: 75%;
-        width: 75%;
+      cursor: default;
+    }
+    ul.minesweeper-subnav {
+      list-style: inherit;
+      margin: inherit;
+      padding: inherit;
+      border-style: outset;
+      width: 150px;
+      display: none;
+      position: absolute;
+      background-color: #d8d8d8;
+      &.active {
+        display: block;
+      }
+      > li {
+        padding: 8px;
+        user-select: none;
+        cursor: default;
+        &:hover {
+          color: #ffffff;
+          background-color: #122a6e;
+        }
       }
     }
   }
-  .Minesweeper-Field {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    height: 300px;
-    width: 300px;
-    justify-items: center;
-    align-items: center;
+}
+
+ul.minesweeper-scoreboard {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #d8d8d8;
+  border-style: inset;
+  padding: 0.25rem;
+  li {
+    input {
+      text-align: center;
+      background: #000000;
+      color: #ff0000;
+      font-family: "Kelly Slab", cursive;
+      font-size: 2rem;
+    }
+    img {
+      height: 2rem;
+      width: 2rem;
+      border-style: outset;
+      padding: 4px;
+    }
   }
+}
+
+main.minesweeper-main {
+  height: 288px;
+  width: 288px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repear(8, 1fr);
+  background-color: #d8d8d8;
 }

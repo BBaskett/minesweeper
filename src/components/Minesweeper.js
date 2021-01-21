@@ -18,16 +18,19 @@ function Minesweeper(props) {
   const tiles = new Array(gridSize - 10).fill("o");
   const gameArray = tiles.concat(bombs);
   const [gameOver, setGameOver] = React.useState(false);
-  const [start, setStart] = React.useState(false);
   const [time, setTime] = React.useState(0);
 
-  const [navOpen, setNavOpen] = React.useState(null);
+  const [activeNav, setActiveNav] = React.useState(null);
+  const [plays, setPlays] = React.useState(0);
+  const [startGame, setStartGame] = React.useState(false);
+  const [timer, setTimer] = React.useState(0);
 
+  // Config Items
   const navLinks = {
     Game: [
       {
         name: "New Game",
-        func: () => console.log("new game"),
+        func: () => setPlays(plays + 1),
         active: true,
       },
       {
@@ -60,19 +63,18 @@ function Minesweeper(props) {
     ],
   };
 
-  if (navOpen) {
-    console.log(navLinks[navOpen]);
-    console.log(Object.values(navLinks[navOpen]));
-  }
-
+  // TODO: Global event listener when menu item clicked to close menu if focus lost
   // TODO: Correct interval which is duplicated on every state change
+
   React.useEffect(() => {
-    if (start) {
+    console.log(startGame);
+    if (startGame) {
+      console.log("started");
       setInterval(() => {
-        return setTime(time + 1);
+        return setTimer(timer + 1);
       }, 1000);
     }
-  }, [start]);
+  });
 
   // TODO: Build function to calculate the amout of bombs around a tile then pass to Tile component
   function shuffle(array) {
@@ -97,34 +99,47 @@ function Minesweeper(props) {
   shuffle(gameArray);
   return (
     <>
-      <nav>
-        {Object.keys(navLinks).map((link) => (
-          <span
-            onClick={() =>
-              navOpen === link ? setNavOpen(null) : setNavOpen(link)
-            }
-          >
-            {link}
-          </span>
+      <ul className="minesweeper-nav">
+        {Object.keys(navLinks).map((link, index) => (
+          <li key={`nav_${index}`}>
+            <span
+              className={activeNav === link ? "active" : null}
+              onClick={() =>
+                activeNav === link ? setActiveNav(null) : setActiveNav(link)
+              }
+            >
+              {link}
+            </span>
+            <ul
+              className={`minesweeper-subnav ${
+                activeNav === link ? "active" : ""
+              }`}
+            >
+              {navLinks[link].map(({ name, func, active }, index) =>
+                active ? (
+                  <li key={`subnav_${index}`} onClick={func}>
+                    {name}
+                  </li>
+                ) : null
+              )}
+            </ul>
+          </li>
         ))}
-        {navOpen ? (
-          <ul>
-            {navLinks[navOpen].map(({ name, func, active }) =>
-              active ? <li>{name}</li> : null
-            )}
-          </ul>
-        ) : null}
-      </nav>
-      <section>
-        <span>10</span>
-        <div>
+      </ul>
+      <ul className="minesweeper-scoreboard">
+        <li>
+          <input type="text" value="010" size="3" readOnly />
+        </li>
+        <li>
           <img src={gameOver ? smiley_game_over : smiley} alt="reset" />
-        </div>
-        <span>{time}</span>
-      </section>
-      <main>
+        </li>
+        <li>
+          <input type="text" value={timer} key={timer} size="3" readOnly />
+        </li>
+      </ul>
+      <main className="minesweeper-main" key={plays}>
         {gameArray.map((tile, index) => (
-          <Tile type={tile} key={index} start={setStart} />
+          <Tile type={tile} key={index} start={setStartGame} />
         ))}
       </main>
     </>

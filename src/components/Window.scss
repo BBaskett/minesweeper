@@ -1,113 +1,16 @@
-.Window {
+div.window {
+  width: fit-content;
   overflow: hidden;
-  min-width: 300px;
-  min-height: 300px;
-  max-height: 700px;
-  max-width: 700px;
-  position: absolute;
   border: 3px solid#d8d8d8;
-  display: flex;
-  flex-direction: column;
-  .Window-Header {
-    background-color: #00178c;
-    background: linear-gradient(90deg, #122a6e, #1a7bc2);
-    .Window-Header-Controls {
-      display: flex;
-      justify-content: space-between;
-      padding: 4px;
-      &:active {
-        cursor: move;
-      }
-      .Window-Header-Controls-Left {
-        display: inherit;
-        align-items: center;
-        img {
-          height: 20px;
-          width: 20px;
-          margin-right: 4px;
-        }
-        span {
-          color: white;
-          font-weight: 700;
-          text-shadow: 2px 2px rgb(0, 0, 0);
-        }
-      }
-      .Window-Header-Controls-Right {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        button {
-          border-radius: 0;
-          font-weight: 700;
-          background-color: #d8d8d8;
-          &:focus {
-            outline: none;
-          }
-        }
-      }
-    }
-    .Window-Header-Subnav {
-      background-color: #d8d8d8;
-      padding: 4px;
-      font-size: 0.75rem;
-      span {
-        text-decoration: none;
-        color: black;
-        cursor: pointer;
-        &:after {
-          content: "";
-          width: 50%;
-          border-bottom: 1px solid black;
-        }
-        + span {
-          margin-left: 1rem;
-        }
-      }
-      .Subnav-Menu {
-        list-style: none;
-        width: 200px;
-        padding: 0;
-        border-style: outset;
-        position: absolute;
-        background-color: inherit;
-        &.hidden {
-          display: none;
-        }
-        > li {
-          padding: 0.5rem;
-          &:hover {
-            background-color: #122a6e;
-            cursor: pointer;
-            color: white;
-          }
-        }
-      }
-    }
-  }
-  .Content {
-    flex-grow: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #d8d8d8;
-  }
-}
-
-.Window {
-  overflow: hidden;
-  min-width: 300px;
-  min-height: 300px;
-  max-height: 700px;
-  max-width: 700px;
-  border: 3px solid#d8d8d8;
-  header {
+  header.window-header {
     display: flex;
     justify-content: space-between;
     background-color: white;
     background: linear-gradient(90deg, #122a6e, #1a7bc2);
     padding: 4px;
-    .Window-Header-Left {
-      display: flex;
-      align-items: center;
+    user-select: none;
+    cursor: default;
+    section {
       img {
         height: 16px;
         width: 16px;
@@ -118,9 +21,7 @@
         font-weight: 700;
         text-shadow: 2px 2px rgb(0, 0, 0);
       }
-    }
-    .Window-Header-Right {
-      button {
+      button.window-button {
         border-radius: 0;
         font-weight: 700;
         background-color: #d8d8d8;

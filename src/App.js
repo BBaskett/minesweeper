@@ -12,20 +12,8 @@ import Taskbar from "./components/Taskbar";
 import Minesweeper from "./components/Minesweeper";
 
 // TODO: Add ability to open new window from start menu
+// TODO: Add window in taskbar where user can close
 function App() {
-  const subnav = [
-    {
-      name: "Game",
-      children: [
-        "New Game",
-        "Statistics",
-        "Options",
-        "Change Appearance",
-        "Exit",
-      ],
-    },
-    { name: "Help", children: ["Instructions"] },
-  ];
   return (
     <div className="App-Wrapper">
       <Window
