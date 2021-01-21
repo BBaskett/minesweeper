@@ -2,8 +2,8 @@ import React from "react";
 import "./Taskbar.scss";
 
 // Images
-import windows98flag from "../images/windows98flag.png";
-import ie from "../images/ie.png";
+import windows98flag from "../../images/windows98flag.png";
+import ie from "../../images/ie.png";
 
 function Taskbar() {
   const [time, setTime] = React.useState();

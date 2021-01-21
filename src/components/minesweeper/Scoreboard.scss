@@ -1,0 +1,26 @@
+ul.minesweeper-scoreboard {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #d8d8d8;
+  border-style: inset;
+  padding: 0.25rem;
+  li {
+    input {
+      text-align: center;
+      background: #000000;
+      color: #ff0000;
+      font-family: "Kelly Slab", cursive;
+      font-size: 2rem;
+    }
+    img {
+      height: 2rem;
+      width: 2rem;
+      border-style: outset;
+      padding: 4px;
+    }
+  }
+}

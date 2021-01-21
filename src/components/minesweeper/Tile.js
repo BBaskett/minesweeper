@@ -4,17 +4,20 @@ import React from "react";
 import "./Tile.scss";
 
 // Images
-import flag from "../images/flag.svg";
+import flag from "../../images/flag.svg";
 
 function Tile(props) {
-  const { type, start } = props;
+  const { parentState, setParentState, type } = props;
   const [active, setActive] = React.useState(false);
   const [flagged, setFlagged] = React.useState(false);
-  function checkTile() {
-    if (type === "b") {
+
+  React.useEffect(() => {
+    if (parentState === "initialize") {
+      setActive(false);
+      return setFlagged(false);
     }
-    return type;
-  }
+  });
+
   function handleClick(event) {
     // Right Click
     if (event.button === 2) {
@@ -26,17 +29,20 @@ function Tile(props) {
     }
     setFlagged(false);
     setActive(true);
-    start(true);
-    return checkTile();
+    return setParentState("started");
   }
+
+  // Hide right-click menu
+  function handleContextMenu(event) {
+    event.preventDefault();
+    return false;
+  }
+
   return (
     <div
       className={`Minesweeper-Tile ${active ? "Pressed" : ""}`}
       onMouseDown={handleClick}
-      onContextMenu={(event) => {
-        event.preventDefault();
-        return false;
-      }}
+      onContextMenu={handleContextMenu}
     >
       {flagged ? <img src={flag} alt="flagged" /> : active ? type : ""}
     </div>

@@ -3,34 +3,26 @@ import React from "react";
 // Styles
 import "./Minesweeper.scss";
 
-// Images
-import smiley from "../images/smiley.svg";
-import smiley_game_over from "../images/smiley_game_over.svg";
-
 // Components
 import Tile from "./Tile";
+import Scoreboard from "./Scoreboard";
 
 function Minesweeper(props) {
-  const height = 8;
-  const width = 8;
-  const gridSize = width * height;
-  const bombs = new Array(10).fill("b");
-  const tiles = new Array(gridSize - 10).fill("o");
-  const gameArray = tiles.concat(bombs);
-  const [gameOver, setGameOver] = React.useState(false);
-  const [time, setTime] = React.useState(0);
-
   const [activeNav, setActiveNav] = React.useState(null);
-  const [plays, setPlays] = React.useState(0);
-  const [startGame, setStartGame] = React.useState(false);
-  const [timer, setTimer] = React.useState(0);
+  // Options: initialize, started, won, lost
+  const [gameState, setGameState] = React.useState("initialize");
+  const [gridState, setGridState] = React.useState([]);
 
   // Config Items
+  const grid = gridGenerator(8, 8, 10);
   const navLinks = {
     Game: [
       {
         name: "New Game",
-        func: () => setPlays(plays + 1),
+        func: () => {
+          setGameState("initialize");
+          return setGridState(grid);
+        },
         active: true,
       },
       {
@@ -63,40 +55,45 @@ function Minesweeper(props) {
     ],
   };
 
-  // TODO: Global event listener when menu item clicked to close menu if focus lost
-  // TODO: Correct interval which is duplicated on every state change
+  // Initialize game
+  React.useEffect(() => {
+    return setGridState(grid);
+  }, []);
 
   React.useEffect(() => {
-    console.log(startGame);
-    if (startGame) {
-      console.log("started");
-      setInterval(() => {
-        return setTimer(timer + 1);
-      }, 1000);
+    if (gameState === "initialize") {
+      return setActiveNav(null);
     }
   });
 
-  // TODO: Build function to calculate the amout of bombs around a tile then pass to Tile component
   function shuffle(array) {
     let currentIndex = array.length,
       temporaryValue,
       randomIndex;
-
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
-
       // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-
     return array;
   }
-  shuffle(gameArray);
+
+  function gridGenerator(height, width, bombs) {
+    const gridSize = height * width;
+    const bombsArray = new Array(bombs).fill("b");
+    const emptyArray = new Array(gridSize - bombs).fill("x");
+    const gameArray = emptyArray.concat(bombsArray);
+    return shuffle(gameArray);
+  }
+
+  // TODO: Global event listener when menu item clicked to close menu if focus lost
+  // TODO: Correct interval which is duplicated on every state change
+  // TODO: Build function to calculate the amout of bombs around a tile then pass to Tile component
   return (
     <>
       <ul className="minesweeper-nav">
@@ -126,20 +123,15 @@ function Minesweeper(props) {
           </li>
         ))}
       </ul>
-      <ul className="minesweeper-scoreboard">
-        <li>
-          <input type="text" value="010" size="3" readOnly />
-        </li>
-        <li>
-          <img src={gameOver ? smiley_game_over : smiley} alt="reset" />
-        </li>
-        <li>
-          <input type="text" value={timer} key={timer} size="3" readOnly />
-        </li>
-      </ul>
-      <main className="minesweeper-main" key={plays}>
-        {gameArray.map((tile, index) => (
-          <Tile type={tile} key={index} start={setStartGame} />
+      <Scoreboard parentState={gameState} />
+      <main className="minesweeper-main">
+        {gridState.map((tile, index) => (
+          <Tile
+            type={tile}
+            key={index}
+            parentState={gameState}
+            setParentState={setGameState}
+          />
         ))}
       </main>
     </>
