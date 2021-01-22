@@ -5,6 +5,10 @@ import "./Taskbar.scss";
 import windows98flag from "../../images/windows98flag.png";
 import ie from "../../images/ie.png";
 
+// TODO: Create taskbar windows for when minimized
+// TODO: Create functional start menu to launch game from
+// TODO: Create desktop shortcut(s)
+
 function Taskbar() {
   const [time, setTime] = React.useState();
   React.useEffect(() => {

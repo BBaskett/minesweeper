@@ -8,27 +8,38 @@ import smiley from "../../images/smiley.svg";
 import smiley_game_over from "../../images/smiley_game_over.svg";
 
 function Scoreboard(props) {
+  const {
+    state: { gameState },
+    flags,
+  } = props;
   const [timer, setTimer] = React.useState(0);
-  const { parentState } = props;
+
   React.useEffect(() => {
-    if (parentState === "initialize") {
+    console.log("Scoreboard", gameState);
+    if (gameState === "initialize") {
       return setTimer(0);
     }
-    if (parentState === "started") {
+    if (gameState === "started") {
       const interval = setInterval(() => {
-        setTimer(timer + 1);
+        setTimer((time) => time + 1);
       }, 1000);
       return () => clearInterval(interval);
     }
-  });
+  }, [gameState]);
+
   return (
     <ul className="minesweeper-scoreboard">
       <li>
-        <input type="text" value="010" size="3" readOnly />
+        <input
+          type="text"
+          value={String(flags).padStart(3, "0")}
+          size="3"
+          readOnly
+        />
       </li>
       <li>
         <img
-          src={parentState === "lost" ? smiley_game_over : smiley}
+          src={gameState === "lost" ? smiley_game_over : smiley}
           alt="smiley"
         />
       </li>

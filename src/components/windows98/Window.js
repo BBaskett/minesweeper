@@ -7,6 +7,8 @@ import "./Window.scss";
 // Componenets
 import Minesweeper from "../minesweeper/Minesweeper";
 
+// TODO: Create exit and minimize functional
+
 function Window(props) {
   const { title, icon, child } = props;
 

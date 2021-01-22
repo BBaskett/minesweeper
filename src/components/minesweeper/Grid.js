@@ -7,50 +7,54 @@ import "./Grid.scss";
 import flag from "../../images/flag.svg";
 import bomb from "../../images/minesweeper_icon.png";
 
-function shuffle(array) {
-  let currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-}
+// Helper Functions
+import { gridGenerator } from "./helper_functions";
 
-function gridGenerator(height, width, bombs) {
-  const gridSize = height * width;
-  const bombsArray = new Array(bombs).fill("bomb");
-  const emptyArray = new Array(gridSize - bombs).fill("x");
-  const gameArray = emptyArray.concat(bombsArray);
-  return shuffle(gameArray);
-}
+// TODO: Display numbers in tiles when clicked
 
 function Tile(props) {
-  const { parentState, setParentState, type } = props;
+  const {
+    state: { gameState, setGameState },
+    flags: { flagCount, setFlagCount },
+    type,
+  } = props;
   const [active, setActive] = React.useState(false);
   const [flagged, setFlagged] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log("Tile", gameState);
+    switch (gameState) {
+      case "initialize":
+        setActive(false);
+        setFlagged(false);
+        break;
+      default:
+        return;
+    }
+  }, [gameState]);
 
   function handleClick(event) {
     // Right Click
     if (event.button === 2) {
-      if (active) {
+      if (active || (flagCount === 0 && flagged === false)) {
         return false;
       }
-      setFlagged(!flagged);
+      if (flagged) {
+        setFlagged(false);
+        return setFlagCount((flags) => flags + 1);
+      }
+      setFlagged(true);
+      return setFlagCount((flags) => flags - 1);
     }
     // Left Click
     if (event.button === 0) {
+      if (flagged) {
+        setFlagCount((flags) => flags + 1);
+      }
       setFlagged(false);
       setActive(true);
     }
-    return setParentState("started");
+    return setGameState("started");
   }
 
   // Hide right-click menu
@@ -60,13 +64,15 @@ function Tile(props) {
   }
 
   function endGame() {
-    return setParentState("lost");
+    return setGameState("lost");
   }
 
   return (
     <div
       className={`minesweeper-tile ${active ? "pressed" : ""}`}
-      onMouseDown={handleClick}
+      onMouseDown={
+        gameState === "won" ? null : gameState === "lost" ? null : handleClick
+      }
       onContextMenu={handleContextMenu}
     >
       {flagged ? (
@@ -85,8 +91,23 @@ function Tile(props) {
 }
 
 function Grid(props) {
-  const { parentState, setParentState } = props;
-  const [gridState, setGridState] = React.useState(gridGenerator(8, 8, 10));
+  const {
+    state: { gameState, setGameState },
+    flags: { flagCount, setFlagCount },
+  } = props;
+  const grid = gridGenerator(8, 8, 10);
+  const [gridState, setGridState] = React.useState(grid);
+
+  React.useEffect(() => {
+    console.log("Grid", gameState);
+    switch (gameState) {
+      case "initialize":
+        setGridState(grid);
+        break;
+      default:
+        return;
+    }
+  }, [gameState]);
 
   return (
     <main className="minesweeper-main">
@@ -94,8 +115,8 @@ function Grid(props) {
         <Tile
           type={tile}
           key={index}
-          parentState={parentState}
-          setParentState={setParentState}
+          state={{ gameState: gameState, setGameState: setGameState }}
+          flags={{ flagCount: flagCount, setFlagCount: setFlagCount }}
         />
       ))}
     </main>

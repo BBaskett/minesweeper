@@ -15,6 +15,10 @@ ul.minesweeper-scoreboard {
       color: #ff0000;
       font-family: "Kelly Slab", cursive;
       font-size: 2rem;
+      cursor: default;
+      &:focus {
+        outline: none;
+      }
     }
     img {
       height: 2rem;
