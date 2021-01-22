@@ -56,12 +56,3 @@ ul.minesweeper-nav {
     }
   }
 }
-
-main.minesweeper-main {
-  height: 288px;
-  width: 288px;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repear(8, 1fr);
-  background-color: #d8d8d8;
-}

@@ -1,0 +1,26 @@
+main.minesweeper-main {
+  height: 288px;
+  width: 288px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repear(8, 1fr);
+  background-color: #d8d8d8;
+  div.minesweeper-tile {
+    height: 36px;
+    width: 36px;
+    border-style: outset;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    user-select: none;
+    &.pressed {
+      border-style: inset;
+    }
+    img {
+      height: 16px;
+      width: 16px;
+    }
+  }
+}

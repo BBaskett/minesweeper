@@ -4,24 +4,22 @@ import React from "react";
 import "./Minesweeper.scss";
 
 // Components
-import Tile from "./Tile";
 import Scoreboard from "./Scoreboard";
+import Grid from "./Grid";
 
 function Minesweeper(props) {
+  const { close } = props;
   const [activeNav, setActiveNav] = React.useState(null);
   // Options: initialize, started, won, lost
   const [gameState, setGameState] = React.useState("initialize");
-  const [gridState, setGridState] = React.useState([]);
 
-  // Config Items
-  const grid = gridGenerator(8, 8, 10);
   const navLinks = {
     Game: [
       {
         name: "New Game",
         func: () => {
-          setGameState("initialize");
-          return setGridState(grid);
+          setActiveNav(null);
+          return setGameState("initialize");
         },
         active: true,
       },
@@ -42,7 +40,9 @@ function Minesweeper(props) {
       },
       {
         name: "Exit",
-        func: null,
+        func: () => {
+          return close();
+        },
         active: true,
       },
     ],
@@ -55,45 +55,6 @@ function Minesweeper(props) {
     ],
   };
 
-  // Initialize game
-  React.useEffect(() => {
-    return setGridState(grid);
-  }, []);
-
-  React.useEffect(() => {
-    if (gameState === "initialize") {
-      return setActiveNav(null);
-    }
-  });
-
-  function shuffle(array) {
-    let currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-    return array;
-  }
-
-  function gridGenerator(height, width, bombs) {
-    const gridSize = height * width;
-    const bombsArray = new Array(bombs).fill("b");
-    const emptyArray = new Array(gridSize - bombs).fill("x");
-    const gameArray = emptyArray.concat(bombsArray);
-    return shuffle(gameArray);
-  }
-
-  // TODO: Global event listener when menu item clicked to close menu if focus lost
-  // TODO: Correct interval which is duplicated on every state change
-  // TODO: Build function to calculate the amout of bombs around a tile then pass to Tile component
   return (
     <>
       <ul className="minesweeper-nav">
@@ -124,16 +85,7 @@ function Minesweeper(props) {
         ))}
       </ul>
       <Scoreboard parentState={gameState} />
-      <main className="minesweeper-main">
-        {gridState.map((tile, index) => (
-          <Tile
-            type={tile}
-            key={index}
-            parentState={gameState}
-            setParentState={setGameState}
-          />
-        ))}
-      </main>
+      <Grid parentState={gameState} setParentState={setGameState} />
     </>
   );
 }

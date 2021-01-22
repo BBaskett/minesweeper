@@ -4,8 +4,12 @@ import Draggable from "react-draggable";
 // Styles
 import "./Window.scss";
 
+// Componenets
+import Minesweeper from "../minesweeper/Minesweeper";
+
 function Window(props) {
   const { title, icon, child } = props;
+
   return (
     <Draggable
       allowAnyClick={false}
@@ -13,6 +17,7 @@ function Window(props) {
       defaultPosition={{ x: 0, y: 0 }}
       bounds="parent"
       cancel=".window-content, .window-button"
+      id="window"
     >
       <div className="window">
         <header className="window-header">
@@ -25,7 +30,9 @@ function Window(props) {
             <button className="window-button">X</button>
           </section>
         </header>
-        <main className="window-content">{child}</main>
+        <main className="window-content">
+          <Minesweeper />
+        </main>
       </div>
     </Draggable>
   );
