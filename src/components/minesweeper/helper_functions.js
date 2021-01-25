@@ -18,7 +18,7 @@ function shuffle(array) {
 export function gridGenerator(height, width, bombs) {
   const gridSize = height * width;
   const bombsArray = new Array(bombs).fill("bomb");
-  const emptyArray = new Array(gridSize - bombs).fill("x");
+  const emptyArray = new Array(gridSize - bombs).fill(0);
   const gameArray = emptyArray.concat(bombsArray);
   return shuffle(gameArray);
 }

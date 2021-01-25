@@ -17,9 +17,11 @@ function Tile(props) {
     state: { gameState, setGameState },
     flags: { flagCount, setFlagCount },
     type,
+    gridDetails: { array, index },
   } = props;
   const [active, setActive] = React.useState(false);
   const [flagged, setFlagged] = React.useState(false);
+  const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
     console.log("Tile", gameState);
@@ -44,7 +46,7 @@ function Tile(props) {
         return setFlagCount((flags) => flags + 1);
       }
       setFlagged(true);
-      return setFlagCount((flags) => flags - 1);
+      setFlagCount((flags) => flags - 1);
     }
     // Left Click
     if (event.button === 0) {
@@ -52,6 +54,38 @@ function Tile(props) {
         setFlagCount((flags) => flags + 1);
       }
       setFlagged(false);
+      // E
+      if (array[index + 1] === "bomb") {
+        setCount(count + 1);
+      }
+      // SE
+      if (array[index + 9] === "bomb") {
+        setCount(count + 1);
+      }
+      // S
+      if (array[index + 8] === "bomb") {
+        setCount(count + 1);
+      }
+      //SW
+      if (array[index + 7] === "bomb") {
+        setCount(count + 1);
+      }
+      // W
+      if (array[index - 1] === "bomb") {
+        setCount(count + 1);
+      }
+      // NW
+      if (array[index - 9] === "bomb") {
+        setCount(count + 1);
+      }
+      // N
+      if (array[index - 8] === "bomb") {
+        setCount(count + 1);
+      }
+      // NE
+      if (array[index - 7] === "bomb") {
+        setCount(count + 1);
+      }
       setActive(true);
     }
     return setGameState("started");
@@ -80,8 +114,10 @@ function Tile(props) {
       ) : active ? (
         type === "bomb" ? (
           <img src={bomb} alt="bomb" onLoad={endGame} />
+        ) : count === 0 ? (
+          ""
         ) : (
-          type
+          count
         )
       ) : (
         ""
@@ -102,7 +138,7 @@ function Grid(props) {
     console.log("Grid", gameState);
     switch (gameState) {
       case "initialize":
-        setGridState(grid);
+        setGridState((prevGrid) => (prevGrid = grid));
         break;
       default:
         return;
@@ -115,6 +151,7 @@ function Grid(props) {
         <Tile
           type={tile}
           key={index}
+          gridDetails={{ array: gridState, index: index }}
           state={{ gameState: gameState, setGameState: setGameState }}
           flags={{ flagCount: flagCount, setFlagCount: setFlagCount }}
         />
