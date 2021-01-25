@@ -15,7 +15,6 @@ function Scoreboard(props) {
   const [timer, setTimer] = React.useState(0);
 
   React.useEffect(() => {
-    console.log("Scoreboard", gameState);
     if (gameState === "initialize") {
       return setTimer(0);
     }

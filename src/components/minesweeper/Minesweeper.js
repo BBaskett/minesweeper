@@ -14,7 +14,6 @@ function Minesweeper(props) {
   const [flagCount, setFlagCount] = React.useState(10);
 
   React.useEffect(() => {
-    console.log("Minesweeper", gameState);
     switch (gameState) {
       case "initialize":
         setFlagCount(10);

@@ -53,10 +53,6 @@ function Menu(props) {
     ],
   };
 
-  React.useEffect(() => {
-    console.log("Menu", gameState);
-  });
-
   return (
     <ul className="minesweeper-nav">
       {Object.keys(navLinks).map((link, index) => (

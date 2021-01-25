@@ -10,7 +10,7 @@ import Minesweeper from "../minesweeper/Minesweeper";
 // TODO: Create exit and minimize functional
 
 function Window(props) {
-  const { title, icon } = props;
+  const { title, icon, arrayIndex, closeFunc } = props;
 
   return (
     <Draggable
@@ -29,7 +29,12 @@ function Window(props) {
           </section>
           <section>
             <button className="window-button">_</button>
-            <button className="window-button">X</button>
+            <button
+              className="window-button"
+              onClick={() => closeFunc(arrayIndex)}
+            >
+              X
+            </button>
           </section>
         </header>
         <main className="window-content">
