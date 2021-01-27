@@ -30,29 +30,45 @@ function Taskbar(props) {
       {startActive ? (
         <aside className="Win98-Start-Menu">
           <div id="Win98-Start-Menu-Vertical-Logo">
-            <b>Windows</b>98
+            <span>
+              <b>Windows</b>98
+            </span>
           </div>
           <ul className="Win98-Start-Menu-Options">
             <li>Windows Update</li>
             <hr />
-            <li>
-              <u>P</u>rograms
+            <li className="Win98-Start-Menu-Option-Extend">
+              <span>
+                <u>P</u>rograms
+              </span>
             </li>
             <li>
               F<u>a</u>vorites
             </li>
-            <li>
-              <u>D</u>ocuments
+            <li className="Win98-Start-Menu-Option-Extend">
+              <span>
+                <u>D</u>ocuments
+              </span>
             </li>
-            <li>
-              <u>S</u>ettings
+            <li className="Win98-Start-Menu-Option-Extend">
+              <span>
+                <u>G</u>ames
+              </span>
             </li>
-            <li>
-              <u>F</u>ind
+            <li className="Win98-Start-Menu-Option-Extend">
+              <span>
+                <u>S</u>ettings
+              </span>
+            </li>
+            <li className="Win98-Start-Menu-Option-Extend">
+              <span>
+                <u>F</u>ind
+              </span>
             </li>
             <li>
               <u>H</u>elp
             </li>
+            <hr />
             <li>
               <u>R</u>un...
             </li>
