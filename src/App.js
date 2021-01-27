@@ -18,22 +18,37 @@ function App() {
   ]);
 
   function closeWindow(position) {
-    let array = windows;
-    return setWindows(array.splice(position, 1));
+    windows.splice(position, 1);
+    const updatedArray = [...windows];
+    return setWindows(updatedArray);
+  }
+
+  function openWindow(application) {
+    switch (application) {
+      case "minesweeper":
+        setWindows(
+          windows.concat({ title: "Minesweeper", icon: minesweeper_icon })
+        );
+        break;
+      default:
+        console.error("Not configured correctly");
+    }
   }
 
   return (
     <div className="App-Wrapper">
-      {windows.map((window, index) => (
-        <Window
-          title={window.title}
-          icon={window.icon}
-          key={index}
-          arrayIndex={index}
-          closeFunc={closeWindow}
-        />
-      ))}
-      <Taskbar />
+      {windows.length > 0
+        ? windows.map((window, index) => (
+            <Window
+              title={window.title}
+              icon={window.icon}
+              key={index}
+              arrayIndex={index}
+              closeFunc={closeWindow}
+            />
+          ))
+        : ""}
+      <Taskbar openWindow={openWindow} />
     </div>
   );
 }

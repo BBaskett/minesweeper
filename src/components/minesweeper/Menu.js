@@ -11,75 +11,69 @@ function Menu(props) {
     state: { gameState, setGameState },
   } = props;
   const [activeNav, setActiveNav] = React.useState(null);
-  const navLinks = {
-    Game: [
-      {
-        name: "New Game",
-        func: () => {
-          setActiveNav(null);
-          return setGameState("initialize");
-        },
-        active: true,
-      },
-      {
-        name: "Statistics",
-        func: null,
-        active: false,
-      },
-      {
-        name: "Options",
-        func: null,
-        active: false,
-      },
-      {
-        name: "Change Appearance",
-        func: null,
-        active: false,
-      },
-      {
-        name: "Exit",
-        func: () => {
-          /* return close(); */
-        },
-        active: true,
-      },
-    ],
-    Help: [
-      {
-        name: "Instructions",
-        func: null,
-        active: true,
-      },
-    ],
-  };
 
   return (
     <ul className="minesweeper-nav">
-      {Object.keys(navLinks).map((link, index) => (
-        <li key={`nav_${index}`}>
-          <span
-            className={activeNav === link ? "active" : null}
-            onClick={() =>
-              activeNav === link ? setActiveNav(null) : setActiveNav(link)
-            }
-          >
-            {link}
-          </span>
+      <li>
+        <span
+          className={activeNav === "Game" ? "active" : null}
+          onClick={() =>
+            activeNav === "Game" ? setActiveNav(null) : setActiveNav("Game")
+          }
+        >
+          Game
           <ul
             className={`minesweeper-subnav ${
-              activeNav === link ? "active" : ""
+              activeNav === "Game" ? "active" : ""
             }`}
           >
-            {navLinks[link].map(({ name, func, active }, index) =>
-              active ? (
-                <li key={`subnav_${index}`} onClick={func}>
-                  {name}
-                </li>
-              ) : null
-            )}
+            <li
+              onClick={() => {
+                setActiveNav(null);
+                return setGameState("initialize");
+              }}
+            >
+              <u>N</u>ew Game
+            </li>
+            {/* <li onClick={() => {}}>
+              <u>S</u>tatistics
+            </li>
+            <li onClick={() => {}}>
+              <u>O</u>ptions
+            </li>
+            <li onClick={() => {}}>
+              <u>C</u>hange Appearance
+            </li> */}
+            <li onClick={() => {}}>
+              <u>E</u>xit
+            </li>
           </ul>
-        </li>
-      ))}
+        </span>
+      </li>
+      <li>
+        <span
+          className={activeNav === "Help" ? "active" : null}
+          onClick={() =>
+            activeNav === "Help" ? setActiveNav(null) : setActiveNav("Help")
+          }
+        >
+          Help
+          <ul
+            className={`minesweeper-subnav ${
+              activeNav === "Help" ? "active" : ""
+            }`}
+          >
+            <li
+              onClick={() => {
+                setActiveNav(null);
+                return setGameState("initialize");
+              }}
+            >
+              <u>I</u>nstructions
+            </li>
+          </ul>
+        </span>
+      </li>
     </ul>
   );
 }

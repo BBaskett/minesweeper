@@ -5,45 +5,67 @@
   display: flex;
   align-items: center;
   background-color: #c0c0c0;
+  .Taskbar-Button {
+    color: inherit;
+    border-width: 2px;
+    border-style: outset;
+    border-color: grey;
+    background-color: inherit;
+    cursor: pointer;
+    padding: 6px 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    &:focus {
+      outline: none;
+    }
+    > img {
+      height: 16px;
+      width: 16px;
+      margin-right: 4px;
+    }
+  }
+  .Taskbar-Shortcuts {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-right: 1px solid grey;
+    > img {
+      height: 16px;
+      width: 16px;
+    }
+  }
+  .Taskbar-Void {
+    flex-grow: 2;
+  }
+  .Taskbar-System {
+    border-style: inset;
+    padding: 2px 4px;
+    font-size: 0.75rem;
+  }
 }
 
-.Taskbar-Button {
-  color: inherit;
-  border-width: 2px;
+.Win98-Start-Menu {
+  background-color: #c0c0c0;
+  width: 300px;
   border-style: outset;
-  border-color: grey;
-  background-color: inherit;
-  cursor: pointer;
-  padding: 6px 10px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-}
-
-.Taskbar-Button > img {
-  height: 16px;
-  width: 16px;
-  margin-right: 4px;
-}
-
-.Taskbar-Shortcuts {
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
-  border-right: 1px solid grey;
-}
-
-.Taskbar-Shortcuts > img {
-  height: 16px;
-  width: 16px;
-}
-
-.Taskbar-Void {
-  flex-grow: 2;
-}
-
-.Taskbar-System {
-  border-style: inset;
-  padding: 2px 4px;
-  font-size: 0.75rem;
+  position: fixed;
+  bottom: 0;
+  #Win98-Start-Menu-Vertical-Logo {
+    background: linear-gradient(90deg, #122a6e, #1a7bc2);
+    color: #ffffff;
+  }
+  .Win98-Start-Menu-Options {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      padding: 8px;
+      cursor: pointer;
+      &:hover {
+        color: #ffffff;
+        background-color: #122a6e;
+      }
+    }
+  }
 }

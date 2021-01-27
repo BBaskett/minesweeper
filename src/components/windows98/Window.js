@@ -31,7 +31,10 @@ function Window(props) {
             <button className="window-button">_</button>
             <button
               className="window-button"
-              onClick={() => closeFunc(arrayIndex)}
+              onClick={() => {
+                console.log("Close window");
+                return closeFunc(arrayIndex);
+              }}
             >
               X
             </button>
