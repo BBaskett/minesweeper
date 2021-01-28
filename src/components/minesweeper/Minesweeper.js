@@ -9,6 +9,7 @@ import Scoreboard from "./Scoreboard";
 import Grid from "./Grid";
 
 function Minesweeper(props) {
+  const { closeGame } = props;
   // Options: initialize, started, won, lost
   const [gameState, setGameState] = React.useState("initialize");
   const [flagCount, setFlagCount] = React.useState(10);
@@ -25,7 +26,10 @@ function Minesweeper(props) {
 
   return (
     <>
-      <Menu state={{ gameState: gameState, setGameState: setGameState }} />
+      <Menu
+        state={{ gameState: gameState, setGameState: setGameState }}
+        exitGame={() => closeGame}
+      />
       <Scoreboard state={{ gameState: gameState }} flags={flagCount} />
       <Grid
         state={{ gameState: gameState, setGameState: setGameState }}

@@ -4,8 +4,8 @@ import React from "react";
 import "./Scoreboard.scss";
 
 // Images
-import smiley from "../../images/smiley.svg";
-import smiley_game_over from "../../images/smiley_game_over.svg";
+import smiley from "../../images/minesweeper_icons/smiley.svg";
+import smiley_game_over from "../../images/minesweeper_icons/smiley_game_over.svg";
 
 function Scoreboard(props) {
   const {

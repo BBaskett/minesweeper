@@ -4,8 +4,8 @@ import React from "react";
 import "./Grid.scss";
 
 // Images
-import flag from "../../images/flag.svg";
-import bomb from "../../images/minesweeper_icon.png";
+import flag from "../../images/minesweeper_icons/flag.svg";
+import bomb from "../../images/minesweeper_icons/minesweeper_icon.png";
 
 // Helper Functions
 import { gridGenerator } from "./helper_functions";

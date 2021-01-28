@@ -12,6 +12,8 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
+
+  // TODO: Edge cases - calculation breaks down when array extends to next line
   return array.map((value, index) => {
     if (value === "*") {
       return value;

@@ -12,13 +12,11 @@
     color: inherit;
     border-width: 2px;
     border-style: outset;
-    border-color: grey;
-    background-color: inherit;
-    cursor: pointer;
-    padding: 6px 10px;
+    background-color: #c0c0c0;
     font-weight: 700;
     display: flex;
     align-items: center;
+    cursor: pointer;
     &:focus {
       outline: none;
     }
@@ -53,21 +51,37 @@
   width: 300px;
   border-style: outset;
   position: fixed;
-  bottom: 34px;
+  bottom: 26px;
   display: flex;
+  font-size: 0.75rem;
   #Win98-Start-Menu-Vertical-Logo {
-    background: linear-gradient(90deg, #122a6e, #1a7bc2);
+    background: linear-gradient(
+      0deg,
+      #122a6e 5%,
+      #1a7bc2 15%,
+      #122a6e 30%,
+      #122a6e
+    );
     color: #ffffff;
-    span {
-      text-orientation: sideways;
+    position: relative;
+    width: 32px;
+    div {
+      transform-origin: 0 0;
+      transform: rotate(270deg);
+      position: absolute;
+      bottom: -5%;
+      font-size: 1.5rem;
     }
   }
   .Win98-Start-Menu-Options {
     margin: 0;
     padding: 0;
     list-style: none;
+    flex: 2;
     li {
       padding: 8px;
+      display: flex;
+      align-items: center;
       cursor: pointer;
       &:hover {
         color: #ffffff;
@@ -76,8 +90,33 @@
       &.Win98-Start-Menu-Option-Extend {
         display: flex;
         justify-content: space-between;
+        position: relative;
         &::after {
           content: ">";
+        }
+        &:hover {
+          .Win98-Start-Menu-Option-Extend-Subnav {
+            display: block;
+          }
+        }
+        span {
+          display: flex;
+          align-items: center;
+        }
+        .Win98-Start-Menu-Option-Extend-Subnav {
+          position: absolute;
+          background-color: #c0c0c0;
+          width: 300px;
+          border-style: outset;
+          padding: 0;
+          margin-left: 260px;
+          display: none;
+          li {
+            color: #000000;
+            &:hover {
+              color: #ffffff;
+            }
+          }
         }
       }
     }

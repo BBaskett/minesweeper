@@ -2,6 +2,9 @@ div.window {
   width: fit-content;
   overflow: hidden;
   border: 3px solid#d8d8d8;
+  position: absolute;
+  top: 0;
+  left: 0;
   header.window-header {
     display: flex;
     justify-content: space-between;

@@ -10,13 +10,13 @@ import Minesweeper from "../minesweeper/Minesweeper";
 // TODO: Create exit and minimize functional
 
 function Window(props) {
-  const { title, icon, arrayIndex, closeFunc } = props;
+  const { title, icon, arrayIndex, closeFunc, x, y } = props;
 
   return (
     <Draggable
       allowAnyClick={false}
       axis="both"
-      defaultPosition={{ x: 0, y: 0 }}
+      defaultPosition={{ x: x, y: y }}
       bounds="parent"
       cancel=".window-content, .window-button"
       id="window"
@@ -32,7 +32,6 @@ function Window(props) {
             <button
               className="window-button"
               onClick={() => {
-                console.log("Close window");
                 return closeFunc(arrayIndex);
               }}
             >
@@ -41,7 +40,7 @@ function Window(props) {
           </section>
         </header>
         <main className="window-content">
-          <Minesweeper />
+          <Minesweeper closeGame={() => closeFunc(arrayIndex)} />
         </main>
       </div>
     </Draggable>
