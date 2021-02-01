@@ -5,7 +5,7 @@ import "./Menu.scss";
 
 function Menu(props) {
   const {
-    state: { gameState, setGameState },
+    state: { setGameState },
     exitGame,
   } = props;
   const [activeNav, setActiveNav] = React.useState(null);

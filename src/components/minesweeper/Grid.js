@@ -113,7 +113,7 @@ function Grid(props) {
       default:
         return;
     }
-  }, [gameState]);
+  }, [gameState, grid]);
 
   return (
     <main className="minesweeper-main">

@@ -16,8 +16,6 @@ import help from "../../images/windows_icons/help_book_small-3.png";
 import minesweeper from "../../images/minesweeper_icons/minesweeper_icon.png";
 import programs from "../../images/windows_icons/appwiz_file-0.png";
 
-// TODO: Create taskbar windows for when minimized
-
 function Taskbar(props) {
   const {
     openWindow,
@@ -172,13 +170,7 @@ function Taskbar(props) {
           className="Taskbar-Button"
           onClick={() => setStartActive(!startActive)}
         >
-          <img
-            src={start}
-            alt="windows_98_flag"
-            alt="start_icon"
-            height="32"
-            width="32"
-          />
+          <img src={start} alt="windows_98_flag" height="32" width="32" />
           <span>Start</span>
         </button>
         <section className="Taskbar-Shortcuts">
