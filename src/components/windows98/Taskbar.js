@@ -17,8 +17,6 @@ import minesweeper from "../../images/minesweeper_icons/minesweeper_icon.png";
 import programs from "../../images/windows_icons/appwiz_file-0.png";
 
 // TODO: Create taskbar windows for when minimized
-// TODO: Create functional start menu to launch game from
-// TODO: Create desktop shortcut(s)
 
 function Taskbar(props) {
   const {
